@@ -30,8 +30,8 @@ if args.inputs.keyboard.d
     args.state.direction = 270
   end
 
-  screen_bound_y = 90
-  screen_bound_x = 160
+  screen_bound_y = 90-args.state.sprite_size
+  screen_bound_x = 160-args.state.sprite_size
 
   if  args.state.sprite_y <= 0
 
