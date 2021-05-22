@@ -1,0 +1,3 @@
+$wizards.itch.set_dev_title "My Name"
+$wizards.itch.set_dev_id "myname"
+$wizards.itch.set_dev_id "rkblitz"
