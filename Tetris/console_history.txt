@@ -1,3 +1,8 @@
+$gtk.reset seed: 1621737232
+$gtk.reset seed: 100
+$recording.cancel
+$recording.stop 'replay.txt'
 $wizards.itch.set_dev_title "My Name"
 $wizards.itch.set_dev_id "myname"
 $wizards.itch.set_dev_id "rkblitz"
+$gtk.reset seed: 1621678048

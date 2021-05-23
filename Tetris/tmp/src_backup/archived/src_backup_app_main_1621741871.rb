@@ -71,17 +71,12 @@ class TetrisGame
         if (@current_piece[x][y] != 0)
           if (@current_piece_y + y >= @grid_h-1)
             return true
-          elsif (@grid[@current_piece_x + x][@current_piece_y + y] != 0)
-            return true
+          elsif (@grid[@current_piece_x =])
           end
         end
       end
     end
-    return false
   end
-
-  def plant_current_piece
-    
 end
 
 def tick args
