@@ -1,0 +1,19 @@
+# * EXCEPTION:
+# * ERROR:
+# ** method_missing: args
+# ** instance:       0
+# ** on class:       Fixnum
+# ** with modules:   [Integral, NumericDeprecated, ValueType, Comparable, Kernel]
+# ** with values:    0
+# ** given args:     [[]]
+# ** exception:      can't define singleton
+# ** backtrace:
+# app/main.rb:10:in init
+# app/main.rb:41:in tick
+# 
+# ** Backtrace:
+# *** app/main.rb:10:in init
+# *** app/main.rb:41:in tick
+
+Game State:
+{:state=>{:entity_id=>5, :tick_count=>3110104, :__thrash_count__=>{:+=>1}, :score=>0, :grid_w=>10, :grid_h=>20, :current_piece_x=>5, :current_piece_y=>0, :grid=>[]}, :temp_state=>{}, :inputs=>{:controller_one=>{:key_down=>{}, :key_held=>{}, :key_up=>{}}, :controller_two=>{:key_down=>{}, :key_held=>{}, :key_up=>{}}, :keyboard=>{:key_up=>{:truthy_keys=>[]}, :key_held=>{:char=>524644, :raw_key=>524644, :truthy_keys=>[:char, :raw_key]}, :key_down=>{:truthy_keys=>[]}, :has_focus=>false}, :mouse=>{:x=>10.0, :y=>1.0, :moved=>nil, :moved_at=>2866558, :has_focus=>false}, :text=>[]}, :passes=>[], :outputs=>{:solids=>[], :sprites=>[], :lines=>[], :labels=>[], :sounds=>[], :borders=>[], :primitives=>[], :static_solids=>[], :static_borders=>[], :static_sprites=>[], :static_lines=>[], :static_labels=>[], :static_primitives=>[]}, :grid=>{:runtime=>{:argv=>"E:\\Projects\\GitHub\\DragonRuby\\Tetris\\dragonruby.exe", :platform=>"Windows", :required_files=>[], :reload_list_history=>{"app/main.rb"=>{:current=>{:path=>"app/main.rb", :global_at=>3114356, :event=>:reload_completed}, :history=>[{:path=>"app/main.rb", :global_at=>-1, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>-1, :event=>:processing}, {:path=>"app/main.rb", :global_at=>-1, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>3108, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>3108, :event=>:processing}, {:path=>"app/main.rb", :global_at=>3109, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>4247, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>4247, :event=>:processing}, {:path=>"app/main.rb", :global_at=>4248, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>4921, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>4922, :event=>:processing}, {:path=>"app/main.rb", :global_at=>4923, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>9672, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>9673, :event=>:processing}, {:path=>"app/main.rb", :global_at=>9674, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>344805, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>344806, :event=>:processing}, {:path=>"app/main.rb", :global_at=>344807, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>536579, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>536580, :event=>:processing}, {:path=>"app/main.rb", :global_at=>536581, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>3114354, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>3114355, :event=>:processing}, {:path=>"app/main.rb", :global_at=>3114356, :event=>:reload_completed}]}}}, :ffi_draw=>"", :name=>:bottom_left, :origin_x=>0.0, :origin_y=>720, :left=>0.0, :right=>1280, :top=>720, :bottom=>0.0, :left_margin=>0.0, :bottom_margin=>0.0, :center_x=>640.0, :center_y=>360.0, :rect=>[0.0, 0.0, 1280, 720], :center=>[640.0, 360.0]}}
