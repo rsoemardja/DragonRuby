@@ -18,17 +18,6 @@ class TetrisGame
       end
     end
   end
-
-  @color_index = [
-    [ 0, 0, 0],
-    [ 255, 0, 0],
-    [ 0, 255, 0],
-    [ 0, 0, 255],
-    [ 255, 255, 0],
-    [ 255, 0, 255],
-    [ 0, 255, 255],
-    [ 127, 127, 127]
-  ]
   
 #   def init args
 #     args.state.score ||= 0
@@ -145,7 +134,7 @@ class TetrisGame
     end
     
     if k.key_down.right || c.key_down.right
-      if @current_piece_x + @current_piece.length < (@grid_w)
+      if @current_piece_x + @current_piece.length) < (@grid_w)
         @current_piece_x += 1
       end
     end

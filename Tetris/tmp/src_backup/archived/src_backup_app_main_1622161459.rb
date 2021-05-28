@@ -18,17 +18,6 @@ class TetrisGame
       end
     end
   end
-
-  @color_index = [
-    [ 0, 0, 0],
-    [ 255, 0, 0],
-    [ 0, 255, 0],
-    [ 0, 0, 255],
-    [ 255, 255, 0],
-    [ 255, 0, 255],
-    [ 0, 255, 255],
-    [ 127, 127, 127]
-  ]
   
 #   def init args
 #     args.state.score ||= 0
@@ -69,14 +58,14 @@ class TetrisGame
     y = -1
     w = @grid_w + 2
     h = @grid_h + 2
-    color = [255, 255, 255]
+    color = [255, 0, 0]
     for i in x..(x+w)-1 do
-      render_cube i, y, *color
-      render_cube i, (y+h)-1, *color
+      render_cube i, y
+      render_cube i, (y+h)-1
     end
     for i in y..(y+h)-1 do
-      render_cube x, i, *color
-      render_cube (x+w)-1, i, *color
+      render_cube x, i
+      render_cube (x+w)-1, i
     end
   end
 
@@ -145,7 +134,7 @@ class TetrisGame
     end
     
     if k.key_down.right || c.key_down.right
-      if @current_piece_x + @current_piece.length < (@grid_w)
+      if @current_piece_x+ @current_piece.length) < (@grid_w)
         @current_piece_x += 1
       end
     end

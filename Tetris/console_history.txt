@@ -1,3 +1,6 @@
+$gtk.reset seed: 1622160337
+$gtk.reset seed: 1622160041
+$gtk.reset seed: 1621829300
 $gtk.reset seed: 1621737232
 $gtk.reset seed: 100
 $recording.cancel

@@ -18,17 +18,6 @@ class TetrisGame
       end
     end
   end
-
-  @color_index = [
-    [ 0, 0, 0],
-    [ 255, 0, 0],
-    [ 0, 255, 0],
-    [ 0, 0, 255],
-    [ 255, 255, 0],
-    [ 255, 0, 255],
-    [ 0, 255, 255],
-    [ 127, 127, 127]
-  ]
   
 #   def init args
 #     args.state.score ||= 0

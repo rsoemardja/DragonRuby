@@ -9,7 +9,6 @@ class TetrisGame
     @grid_h = 20
     @current_piece_x = 5
     @current_piece_y = 0
-    @current_piece =[ [ 1, 1], [ 1, 1] ]
     @grid = []
     for x in 0..@grid_w-1 do
       @grid[x] = []
@@ -18,17 +17,6 @@ class TetrisGame
       end
     end
   end
-
-  @color_index = [
-    [ 0, 0, 0],
-    [ 255, 0, 0],
-    [ 0, 255, 0],
-    [ 0, 0, 255],
-    [ 255, 255, 0],
-    [ 255, 0, 255],
-    [ 0, 255, 255],
-    [ 127, 127, 127]
-  ]
   
 #   def init args
 #     args.state.score ||= 0
@@ -69,14 +57,14 @@ class TetrisGame
     y = -1
     w = @grid_w + 2
     h = @grid_h + 2
-    color = [255, 255, 255]
+    color = [255, 0, 0]
     for i in x..(x+w)-1 do
-      render_cube i, y, *color
-      render_cube i, (y+h)-1, *color
+      render_cube i, y
+      render_cube i, (y+h)-1
     end
     for i in y..(y+h)-1 do
-      render_cube x, i, *color
-      render_cube (x+w)-1, i, *color
+      render_cube x, i
+      render_cube (x+w)-1, i
     end
   end
 
@@ -133,42 +121,6 @@ class TetrisGame
     @current_piece_y = 0
   end
 
-  def iterate
-    #check input!
-    k = @args.input.keyboard
-    c = @args.input.controller_one
-
-    if k.key_down.left || c.key_down.left
-      if @current_piece_x > 0
-        @current_piece_x -= 1
-      end
-    end
-    
-    if k.key_down.right || c.key_down.right
-      if @current_piece_x + @current_piece.length < (@grid_w)
-        @current_piece_x += 1
-      end
-    end
-    
-    if k.key_down.down || k.key_held.down || c.key_down.down || c.key_held.down
-      @next_move -= 10
-    end
-
-    @next_move -= 1
-    if @next_move <= 0 # drop the piece!
-      if current_piece_colliding
-        plant_current_piece
-      else
-         @current_piece_y += 1
-      end
-      @next_move = 20
-    end
-  end
-
-  def tick
-      iterate
-      render
-  end
 end
 
 def tick args

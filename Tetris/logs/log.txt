@@ -1,3 +1,1 @@
 DragonRuby GTK Log Messages. Set $gtk.log_level = :off to disable logging to the Console/HUD (log messages will still be written here). Log options are: :on, :off.
-* INFO: Game state and exception will be written to exceptions/game_state_0.txt and exceptions/current.txt.
-* INFO: Game state and exception will be written to exceptions/game_state_0.txt and exceptions/current.txt.

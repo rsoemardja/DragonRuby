@@ -1,3 +1,5 @@
+$gtk.reset
+
 class TetrisGame
   def initialize args
     @args = args
@@ -7,7 +9,8 @@ class TetrisGame
     @grid_h = 20
     @current_piece_x = 5
     @current_piece_y = 0
-    @grid
+    @current_piece =[ [ 1, 1], [ 1, 1] ]
+    @grid = []
     for x in 0..@grid_w-1 do
       @grid[x] = []
       for y in 0..@grid_h-1 do
@@ -15,6 +18,17 @@ class TetrisGame
       end
     end
   end
+
+  @color_index = [
+    [ 0, 0, 0],
+    [ 255, 0, 0],
+    [ 0, 255, 0],
+    [ 0, 0, 255],
+    [ 255, 255, 0],
+    [ 255, 0, 255],
+    [ 0, 255, 255],
+    [ 127, 127, 127]
+  ]
   
 #   def init args
 #     args.state.score ||= 0
@@ -35,23 +49,48 @@ class TetrisGame
 # end
 
   # X  AND Y ARE POSITIONS IN THE GRID, NOT PIXELS
-  def render_cube args, x, y
+  def render_cube x, y, r, g, b, a=255
     boxsize = 30
-    grid_x = (1280 - (args.state.grid_w * boxsize)) / 2
-    grid_y = (720 - (args.state.grid_h * boxsize)) / 2
-    args.outputs.solids << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize), 255 ,0, 0, 255 ]
+    grid_x = (1280 - (@grid_w * boxsize)) / 2
+    grid_y = (720 - ((@grid_h-2) * boxsize)) / 2
+    args.outputs.solids << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, r, g, b, a]
   end
 
   def render_grid args
     for x in 0..args.state.grid_w-1 do
       for y in 0..args.state.grid_h-1 do
-        render_cube args, x, y
+        render_cube args, x, y if @grid[x][y] != 0
       end
     end
   end
 
-  def render_background args
-    args.outputs.solids << [ 0, 0, 1280, 720, 0, 0, 0,]
+  def render_grid_border
+    x = -1
+    y = -1
+    w = @grid_w + 2
+    h = @grid_h + 2
+    color = [255, 255, 255]
+    for i in x..(x+w)-1 do
+      render_cube i, y, *color
+      render_cube i, (y+h)-1, *color
+    end
+    for i in y..(y+h)-1 do
+      render_cube x, i, *color
+      render_cube (x+w)-1, i, *color
+    end
+  end
+
+  def render_background
+    @args.outputs.solids << [ 0, 0, 1280, 720, 0, 0, 0,]
+    render_grid_border
+  end
+
+  def render_current_piece
+    for x in 0..@current_piece.length-1 do
+      for y in 0..@current_piece[x].length-1 do
+        render_cube @current_piece_x + x, @current_piece_y, 255, 0, 0 if @current_piece[x][y] != 0
+      end
+    end
   end
 
   def render args
@@ -61,9 +100,11 @@ class TetrisGame
     #render_score
   end
 
-  # def tick
-  #     render
-  # end
+  def tick
+    @grid[2][2] = 1
+    @grid[7][15] = 1
+    render
+  end
 
   def current_piece_colliding
     for x in 0..@current_piece.length-1 do
@@ -81,7 +122,53 @@ class TetrisGame
   end
 
   def plant_current_piece
+    # Make this part of the landscape
+    for x in 0..@current_piece.length-1 do
+      for y in 0.@current_piece[x].length-1 do
+        if @current_piece[x][y] != 0
+          @grid[@current_piece_x + x][@current_piece_y + y] = @current_piece[x][y]
+        end
+      end
+    end
+    @current_piece_y = 0
+  end
+
+  def iterate
+    #check input!
+    k = @args.input.keyboard
+    c = @args.input.controller_one
+
+    if k.key_down.left || c.key_down.left
+      if @current_piece_x > 0
+        @current_piece_x -= 1
+      end
+    end
     
+    if k.key_down.right || c.key_down.right
+      if @current_piece_x + @current_piece.length < (@grid_w)
+        @current_piece_x += 1
+      end
+    end
+    
+    if k.key_down.down || k.key_held.down || c.key_down.down || c.key_held.down
+      @next_move -= 10
+    end
+
+    @next_move -= 1
+    if @next_move <= 0 # drop the piece!
+      if current_piece_colliding
+        plant_current_piece
+      else
+         @current_piece_y += 1
+      end
+      @next_move = 20
+    end
+  end
+
+  def tick
+      iterate
+      render
+  end
 end
 
 def tick args
