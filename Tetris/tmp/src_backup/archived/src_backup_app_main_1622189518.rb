@@ -70,7 +70,7 @@ class TetrisGame
   def render_piece piece, piece_x, piece_y
     for x in 0..piece.length-1 do
       for y in 0..piece[x].length-1 do
-        render_cube piece_x + x, piece_y + y, piece[x][y] if piece[x][y] != 0
+        render_cube piece_x + x, piece_y, piece[x][y] if piece[x][y] != 0
       end
     end
   end
@@ -82,7 +82,7 @@ class TetrisGame
   def render_next_piece
     # Dont hardcode these numbers
     render_grid_border 13, 2, 8, 8
-    centerx = ( 8 - @next_piece.length) / 2
+    centerx = ( 0 - @next_piece.length) / 2
     centery = ( 8 - @next_piece[0].length) / 2
     render_piece @next_piece, 13 + centerx, 2 + centery
     @args.outputs.labels << [ 910, 640, "Next piece", 10, 255, 255, 255, 255]
@@ -90,7 +90,7 @@ class TetrisGame
 
   def render_score
     @args.outputs.labels << [ 75, 75, "Score: #{@score}", 10, 255, 255, 255, 255 ]
-    @args.outputs.labels << [ 200, 450, "GAME OVER", 100, 255, 255, 255, 255 ] if @gameover
+    @args.outputs.labels << [ 75, 75, "GAME OVER", 100, 255, 255, 255, 255 ] if @gameover
   end
 
   def render
@@ -179,9 +179,6 @@ class TetrisGame
     @current_piece = @current_piece.transpose.map(&:reverse)
     @current_piece = @current_piece.transpose.map(&:reverse)
     @current_piece = @current_piece.transpose.map(&:reverse)
-    if (@current_piece_x + @current_piece.length) >= @grid_w
-      @current_piece_x = grid_w - @current_piece.length
-    end
   end
 
   def iterate

@@ -1,7 +1,7 @@
-#devid=myname
-#devtitle=My Name
-#gameid=mygame
-#gametitle=My Game
+devid=Lil_Ramza
+devtitle=Rama Komarudin Soemardja
+gameid=RamzaDragontris
+gametitle=Dragontris
 #version=0.1
 #icon=metadata/icon.png
 #compile_ruby=false

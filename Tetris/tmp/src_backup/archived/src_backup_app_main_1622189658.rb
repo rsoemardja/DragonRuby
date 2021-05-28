@@ -70,7 +70,7 @@ class TetrisGame
   def render_piece piece, piece_x, piece_y
     for x in 0..piece.length-1 do
       for y in 0..piece[x].length-1 do
-        render_cube piece_x + x, piece_y + y, piece[x][y] if piece[x][y] != 0
+        render_cube piece_x + x, piece_y, piece[x][y] if piece[x][y] != 0
       end
     end
   end
@@ -179,9 +179,6 @@ class TetrisGame
     @current_piece = @current_piece.transpose.map(&:reverse)
     @current_piece = @current_piece.transpose.map(&:reverse)
     @current_piece = @current_piece.transpose.map(&:reverse)
-    if (@current_piece_x + @current_piece.length) >= @grid_w
-      @current_piece_x = grid_w - @current_piece.length
-    end
   end
 
   def iterate
