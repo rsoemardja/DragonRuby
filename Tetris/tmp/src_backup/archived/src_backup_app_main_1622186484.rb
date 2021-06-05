@@ -3,8 +3,7 @@ $gtk.reset
 class TetrisGame
   def initialize args
     @args = args
-    @next_piece = nil
-    @next_move = 30
+    @next_move = nil
     @score = 0
     @gameover = false
     @grid_w = 10
@@ -18,14 +17,14 @@ class TetrisGame
     end
 
     @color_index = [
-    [ 0, 0, 0 ],
-    [ 255, 0, 0 ],
-    [ 0, 255, 0 ],
-    [ 0, 0, 255 ],
-    [ 255, 255, 0 ],
-    [ 255, 0, 255 ],
-    [ 0, 255, 255] ,
-    [ 127, 127, 127 ]
+    [ 0, 0, 0],
+    [ 255, 0, 0],
+    [ 0, 255, 0],
+    [ 0, 0, 255],
+    [ 255, 255, 0],
+    [ 255, 0, 255],
+    [ 0, 255, 255],
+    [ 127, 127, 127]
     ]
   
     select_next_piece
@@ -37,13 +36,13 @@ class TetrisGame
     boxsize = 30
     grid_x = (1280 - (@grid_w * boxsize)) / 2
     grid_y = (720 - ((@grid_h-2) * boxsize)) / 2
-    @args.outputs.solids << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, *@color_index[color] ]
-    @args.outputs.borders << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, 255,255,255 ]
+    args.outputs.solids << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, *@color_index[color] ]
+    args.outputs.borders << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, 255,255,255 ]
   end
 
   def render_grid
-    for x in 0..@grid_w-1 do
-      for y in 0..@grid_h-1 do
+    for x in 0..args.state.grid_w-1 do
+      for y in 0..args.state.grid_h-1 do
         render_cube x, y, @grid[x][y] if @grid[x][y] != 0
       end
     end
@@ -70,7 +69,7 @@ class TetrisGame
   def render_piece piece, piece_x, piece_y
     for x in 0..piece.length-1 do
       for y in 0..piece[x].length-1 do
-        render_cube piece_x + x, piece_y + y, piece[x][y] if piece[x][y] != 0
+        render_cube piece_x + x, @current_piece_y, @current_piece[x][y] if @current_piece[x][y] != 0
       end
     end
   end
@@ -85,15 +84,14 @@ class TetrisGame
     centerx = ( 8 - @next_piece.length) / 2
     centery = ( 8 - @next_piece[0].length) / 2
     render_piece @next_piece, 13 + centerx, 2 + centery
-    @args.outputs.labels << [ 910, 640, "Next piece", 10, 255, 255, 255, 255]
+    @args.outputs.labels << [ 900, 600, "Next piece", 10, 255, 255, 255, 255]
   end
 
   def render_score
     @args.outputs.labels << [ 75, 75, "Score: #{@score}", 10, 255, 255, 255, 255 ]
-    @args.outputs.labels << [ 200, 450, "GAME OVER", 100, 255, 255, 255, 255 ] if @gameover
-  end
+    @args.outputs.labels << [ 75, 75, "GAME OVER", 100, 255, 255, 255, 255 ] if @gameover
 
-  def render
+  def render args
     render_background
     render_grid
     render_next_piece
@@ -107,7 +105,7 @@ class TetrisGame
         if (@current_piece[x][y] != 0)
           if (@current_piece_y + y >= @grid_h-1)
             return true
-          elsif (@grid[@current_piece_x + x][@current_piece_y + y + 1] != 0)
+          elsif (@grid[@current_piece_x + x][@current_piece_y + y] != 0)
             return true
           end
         end
@@ -139,33 +137,9 @@ class TetrisGame
         end
       end
     end
-
-    for y in 0..@grid_h-1
-      full = true
-      for x in 0..@grid_w-1
-        if @grid[x][y] == 0
-          full = false
-          break
-        end
-      end
-
-      if full
-        @score += 1
-        for i in y.downto(1) do
-          for j in 0..@grid_w-1
-            @grid[j][i] = @grid[j][i-1]
-          end
-        end
-        for i in 0..@grid.w-1
-          @grid[i][0] = 0
-        end
-      end
-    end
-
+    @current_piece_y = 0
+    @current_piece_x = 5
     select_next_piece
-    if current_piece_colliding
-      @gameover = true
-    end
   end
 
   def rotate_current_piece_left
@@ -179,9 +153,6 @@ class TetrisGame
     @current_piece = @current_piece.transpose.map(&:reverse)
     @current_piece = @current_piece.transpose.map(&:reverse)
     @current_piece = @current_piece.transpose.map(&:reverse)
-    if (@current_piece_x + @current_piece.length) >= @grid_w
-      @current_piece_x = grid_w - @current_piece.length
-    end
   end
 
   def iterate
@@ -193,7 +164,7 @@ class TetrisGame
       if k.key_down.space || c.key_down.start
         $gtk.reset
       end
-      return
+    return
     end
 
     if k.key_down.left || c.key_down.left

@@ -37,8 +37,8 @@ class TetrisGame
     boxsize = 30
     grid_x = (1280 - (@grid_w * boxsize)) / 2
     grid_y = (720 - ((@grid_h-2) * boxsize)) / 2
-    @args.outputs.solids << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, *@color_index[color] ]
-    @args.outputs.borders << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, 255,255,255 ]
+    args.outputs.solids << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, *@color_index[color] ]
+    args.outputs.borders << [ grid_x + (x * boxsize), (720 - grid_y) - (y * boxsize),  boxsize, boxsize, 255,255,255 ]
   end
 
   def render_grid
@@ -70,7 +70,7 @@ class TetrisGame
   def render_piece piece, piece_x, piece_y
     for x in 0..piece.length-1 do
       for y in 0..piece[x].length-1 do
-        render_cube piece_x + x, piece_y + y, piece[x][y] if piece[x][y] != 0
+        render_cube piece_x + x, piece_y, piece[x][y] if piece[x][y] != 0
       end
     end
   end
@@ -90,7 +90,7 @@ class TetrisGame
 
   def render_score
     @args.outputs.labels << [ 75, 75, "Score: #{@score}", 10, 255, 255, 255, 255 ]
-    @args.outputs.labels << [ 200, 450, "GAME OVER", 100, 255, 255, 255, 255 ] if @gameover
+    @args.outputs.labels << [ 75, 75, "GAME OVER", 100, 255, 255, 255, 255 ] if @gameover
   end
 
   def render
@@ -140,7 +140,7 @@ class TetrisGame
       end
     end
 
-    for y in 0..@grid_h-1
+    for y in 0.@grid_h-1
       full = true
       for x in 0..@grid_w-1
         if @grid[x][y] == 0
@@ -161,7 +161,7 @@ class TetrisGame
         end
       end
     end
-
+    
     select_next_piece
     if current_piece_colliding
       @gameover = true
@@ -179,9 +179,6 @@ class TetrisGame
     @current_piece = @current_piece.transpose.map(&:reverse)
     @current_piece = @current_piece.transpose.map(&:reverse)
     @current_piece = @current_piece.transpose.map(&:reverse)
-    if (@current_piece_x + @current_piece.length) >= @grid_w
-      @current_piece_x = grid_w - @current_piece.length
-    end
   end
 
   def iterate

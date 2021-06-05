@@ -70,7 +70,7 @@ class TetrisGame
   def render_piece piece, piece_x, piece_y
     for x in 0..piece.length-1 do
       for y in 0..piece[x].length-1 do
-        render_cube piece_x + x, piece_y + y, piece[x][y] if piece[x][y] != 0
+        render_cube piece_x + x, piece_y, piece[x][y] if piece[x][y] != 0
       end
     end
   end

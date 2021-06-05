@@ -1,10 +1,22 @@
 # * EXCEPTION:
-# ** Failed to reload app/main.rb.
-# line 91:0: syntax error, unexpected $end, expecting keyword_end
-# 
-# 
-# 
+# * ERROR - :args method missing
+# ** Inspect
+# #<TetrisGame:0x31bbb40>
+# ** Details
+# The method named
+# :args
+# with args
+# []
+# doesn't exist on
+# [TetrisGame, #<Class:#<TetrisGame:0x31bbb40>>].
 # ** Backtrace:
+# *** app/main.rb:40:in render_cube
+# *** app/main.rb:55:in render_grid_border
+# *** app/main.rb:54:in render_grid_border
+# *** app/main.rb:67:in render_background
+# *** app/main.rb:97:in render
+# *** app/main.rb:233:in tick
+# *** app/main.rb:239:in tick
 
 Game State:
-{:state=>{:entity_id=>5, :tick_count=>1, :__thrash_count__=>{}}, :temp_state=>{}, :inputs=>{:controller_one=>{:key_down=>{}, :key_held=>{}, :key_up=>{}}, :controller_two=>{:key_down=>{}, :key_held=>{}, :key_up=>{}}, :keyboard=>{:key_up=>{:truthy_keys=>[]}, :key_held=>{:truthy_keys=>[]}, :key_down=>{:truthy_keys=>[]}, :has_focus=>false}, :mouse=>{:x=>0.0, :y=>75.0, :moved=>nil, :moved_at=>1, :has_focus=>false}, :text=>[]}, :passes=>[{:solids=>[], :sprites=>[], :lines=>[], :labels=>[], :sounds=>[], :borders=>[], :primitives=>[], :static_solids=>[], :static_borders=>[], :static_sprites=>[], :static_lines=>[], :static_labels=>[], :static_primitives=>[]}], :outputs=>{:solids=>[], :sprites=>[], :lines=>[], :labels=>[], :sounds=>[], :borders=>[], :primitives=>[], :static_solids=>[], :static_borders=>[], :static_sprites=>[], :static_lines=>[], :static_labels=>[], :static_primitives=>[]}, :grid=>{:runtime=>{:argv=>"E:\\Projects\\GitHub\\DragonRuby\\Tetris\\dragonruby.exe", :platform=>"Windows", :required_files=>[], :reload_list_history=>{"app/main.rb"=>{:current=>{:path=>"app/main.rb", :global_at=>203216, :event=>:reload_completed}, :history=>[{:path=>"app/main.rb", :global_at=>-1, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>-1, :event=>:processing}, {:path=>"app/main.rb", :global_at=>-1, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>479, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>480, :event=>:processing}, {:path=>"app/main.rb", :global_at=>481, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>182284, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>182284, :event=>:processing}, {:path=>"app/main.rb", :global_at=>182284, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>202820, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>202821, :event=>:processing}, {:path=>"app/main.rb", :global_at=>202822, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>203215, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>203215, :event=>:processing}, {:path=>"app/main.rb", :global_at=>203216, :event=>:reload_completed}]}}}, :ffi_draw=>"", :name=>:bottom_left, :origin_x=>0.0, :origin_y=>720, :left=>0.0, :right=>1280, :top=>720, :bottom=>0.0, :left_margin=>0.0, :bottom_margin=>0.0, :center_x=>640.0, :center_y=>360.0, :rect=>[0.0, 0.0, 1280, 720], :center=>[640.0, 360.0]}}
+{:state=>{:entity_id=>3, :tick_count=>1, :__thrash_count__=>{:+=>1}, :game=>#<TetrisGame:0x31bbb40>}, :temp_state=>{}, :inputs=>{:controller_one=>{:key_down=>{}, :key_held=>{}, :key_up=>{}}, :controller_two=>{:key_down=>{}, :key_held=>{}, :key_up=>{}}, :keyboard=>{:key_up=>{:truthy_keys=>[]}, :key_held=>{:truthy_keys=>[]}, :key_down=>{:truthy_keys=>[]}, :has_focus=>false}, :mouse=>{:x=>913.0, :y=>720.0, :moved=>nil, :moved_at=>0, :has_focus=>false}, :text=>[]}, :passes=>[], :outputs=>{:solids=>[[0, 0, 1280, 720, 0, 0, 0]], :sprites=>[[75, 300, 300, 300, "console-logo.png"]], :lines=>[], :labels=>[], :sounds=>[], :borders=>[], :primitives=>[], :static_solids=>[], :static_borders=>[], :static_sprites=>[], :static_lines=>[], :static_labels=>[], :static_primitives=>[]}, :grid=>{:runtime=>{:argv=>"E:\\Projects\\GitHub\\DragonRuby\\Tetris\\dragonruby.exe", :platform=>"Windows", :required_files=>[], :reload_list_history=>{"app/main.rb"=>{:current=>{:path=>"app/main.rb", :global_at=>45534, :event=>:reload_completed}, :history=>[{:path=>"app/main.rb", :global_at=>-1, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>-1, :event=>:processing}, {:path=>"app/main.rb", :global_at=>-1, :event=>:reload_completed}, {:path=>"app/main.rb", :global_at=>45532, :event=>:reload_queued}, {:path=>"app/main.rb", :global_at=>45533, :event=>:processing}, {:path=>"app/main.rb", :global_at=>45534, :event=>:reload_completed}]}}}, :ffi_draw=>"", :name=>:bottom_left, :origin_x=>0.0, :origin_y=>720, :left=>0.0, :right=>1280, :top=>720, :bottom=>0.0, :left_margin=>0.0, :bottom_margin=>0.0, :center_x=>640.0, :center_y=>360.0, :rect=>[0.0, 0.0, 1280, 720], :center=>[640.0, 360.0]}}
